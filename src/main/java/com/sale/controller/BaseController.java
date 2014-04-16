@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class BaseController {
-    @RequestMapping("/")
+    @RequestMapping("/index")
     public String base(Model model) {
         model.addAttribute("message", "Success");
         return "index";
