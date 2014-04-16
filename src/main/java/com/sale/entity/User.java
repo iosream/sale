@@ -15,17 +15,41 @@ import javax.persistence.Id;
  * To change this template use File | Settings | File Templates.
  */
 public class User {
-    @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
-    @GenericGenerator(name = "system-uuid",strategy="uuid")
-    @Column
-    private long id;
+    public enum GenderType {
+        male(1),
+        female(2);
 
-    @Column
+        private int index;
+
+        GenderType(int index) {
+            this.index = index;
+        }
+
+        public String getGenderInChinese(GenderType genderType) {
+            if(genderType == GenderType.male) {
+                return "男";
+            } else if(genderType == GenderType.female) {
+                return "女";
+            } else {
+                return "未知";
+            }
+        }
+    }
+    @Column(nullable = false)
     private String username;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String nickname;
 
+    @Column
+    private String email;
+
+    @Column
+    private String mobile;
+
+    @Column(nullable = false)
+    private String gender;
 }

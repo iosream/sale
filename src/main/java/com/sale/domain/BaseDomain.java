@@ -1,5 +1,12 @@
 package com.sale.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Created with IntelliJ IDEA.
  * User: wangzhi
@@ -7,13 +14,27 @@ package com.sale.domain;
  * Time: 3:13 PM
  * To change this template use File | Settings | File Templates.
  */
-public class BaseDomain {
+public class BaseDomain implements java.io.Serializable {
     private int rows;
     private int total;
     private int pageSize;
     private int startIndex;
     private int totalPage;
     private int page;
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GenericGenerator(name = "system-uuid",strategy="uuid")
+    @Column
+    private long id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public int getRows() {
         return rows;
