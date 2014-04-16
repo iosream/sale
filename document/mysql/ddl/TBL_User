@@ -1,6 +1,6 @@
 delimiter $$
 
-CREATE TABLE `TBL_USER` (
+CREATE TABLE test_ssh.`TBL_USER` (
   `id` bigint(20) NOT NULL,
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
