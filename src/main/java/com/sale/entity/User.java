@@ -16,14 +16,8 @@ import javax.persistence.Id;
  */
 public class User {
     public enum GenderType {
-        male(1),
-        female(2);
-
-        private int index;
-
-        GenderType(int index) {
-            this.index = index;
-        }
+        male,
+        female;
 
         public String getGenderInChinese(GenderType genderType) {
             if(genderType == GenderType.male) {
