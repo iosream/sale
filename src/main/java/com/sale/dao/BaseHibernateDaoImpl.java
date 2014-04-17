@@ -1,20 +1,14 @@
 package com.sale.dao;
 
-import com.sale.domain.BaseDomain;
+import com.sale.entity.BaseEntity;
 import org.hibernate.Criteria;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
-import org.springframework.beans.factory.annotation.Autowire;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 
@@ -26,25 +20,19 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Controller(value = "baseHibernateDaoImpl")
-public class BaseHibernateDaoImpl<T extends BaseDomain, ID extends Serializable> extends HibernateDaoSupport implements BaseDao<T, ID>{
-    @Resource
-    private SessionFactory sessionFactory;
-
-    @Resource
-    private HibernateTemplate hibernateTemplate;
-
+public class BaseHibernateDaoImpl<T extends BaseEntity, ID extends Serializable> extends HibernateDaoSupport implements BaseDao<T, ID>{
     @Override
-    public <T extends BaseDomain> T getEntityById(ID id, Class clazz) {
+    public <T extends BaseEntity> T getEntityById(ID id, Class clazz) {
         return (T) getHibernateTemplate().get(clazz.getName(), id);
     }
 
     @Override
-    public <T extends BaseDomain> T getEntityByInstance(T instance) {
+    public <T extends BaseEntity> T getEntityByInstance(T instance) {
         return (T) getHibernateTemplate().findByExample(instance);
     }
 
     @Override
-    public <T extends BaseDomain> List<T> getAllEntities(Class clazz, Order order, String orderBy) {
+    public <T extends BaseEntity> List<T> getAllEntities(Class clazz, Order order, String orderBy) {
         return createCriteria(clazz, order, orderBy).list();
     }
 
@@ -55,7 +43,7 @@ public class BaseHibernateDaoImpl<T extends BaseDomain, ID extends Serializable>
     }
 
     @Override
-    public <T extends BaseDomain> List<T> getEntityWithPagination(T instance, Order order, String orderBy, Criterion... criterions) {
+    public <T extends BaseEntity> List<T> getEntityWithPagination(T instance, Order order, String orderBy, Criterion... criterions) {
         Criteria criteria = createCriteria(instance.getClass(), order, orderBy, criterions);
         return criteria.list();
     }

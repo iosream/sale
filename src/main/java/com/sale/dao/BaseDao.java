@@ -1,6 +1,6 @@
 package com.sale.dao;
 
-import com.sale.domain.BaseDomain;
+import com.sale.entity.BaseEntity;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
@@ -15,21 +15,21 @@ import java.util.List;
  * Time: 2:01 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface BaseDao<T extends BaseDomain, ID extends Serializable> {
+public interface BaseDao<T extends BaseEntity, ID extends Serializable> {
     /**
      *
      * @param id
      * @param clazz
      * @return
      */
-    public <T extends BaseDomain> T getEntityById(ID id, Class clazz);
+    public <T extends BaseEntity> T getEntityById(ID id, Class clazz);
 
     /**
      *
      * @param instance
      * @return
      */
-    public <T extends BaseDomain> T getEntityByInstance(T instance);
+    public <T extends BaseEntity> T getEntityByInstance(T instance);
 
     /**
      *
@@ -38,7 +38,7 @@ public interface BaseDao<T extends BaseDomain, ID extends Serializable> {
      * @param order
      *@param orderBy @return
      */
-    public <T extends BaseDomain> List<T> getAllEntities(Class clazz, Order order, String orderBy);
+    public <T extends BaseEntity> List<T> getAllEntities(Class clazz, Order order, String orderBy);
 
     /**
      *
@@ -56,7 +56,7 @@ public interface BaseDao<T extends BaseDomain, ID extends Serializable> {
      * @param order
      * @param orderBy
      * @param criterions    @return     */
-    public <T extends BaseDomain> List<T> getEntityWithPagination(T instance, Order order, String orderBy, Criterion... criterions);
+    public <T extends BaseEntity> List<T> getEntityWithPagination(T instance, Order order, String orderBy, Criterion... criterions);
 
     /**
      *

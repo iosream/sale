@@ -1,4 +1,4 @@
-package com.sale.domain;
+package com.sale.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -14,27 +14,13 @@ import javax.persistence.Id;
  * Time: 3:13 PM
  * To change this template use File | Settings | File Templates.
  */
-public class BaseDomain implements java.io.Serializable {
+public class BaseEntity implements java.io.Serializable {
     private int rows;
     private int total;
     private int pageSize;
     private int startIndex;
     private int totalPage;
     private int page;
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
-    @GenericGenerator(name = "system-uuid",strategy="uuid")
-    @Column
-    private long id;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public int getRows() {
         return rows;
