@@ -2,6 +2,7 @@ package com.sale.dao;
 
 import com.sale.entity.BaseEntity;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
@@ -27,8 +28,8 @@ public class BaseHibernateDaoImpl<T extends BaseEntity, ID extends Serializable>
     }
 
     @Override
-    public <T extends BaseEntity> T getEntityByInstance(T instance) {
-        return (T) getHibernateTemplate().findByExample(instance);
+    public <T extends BaseEntity> List<T> getEntityByInstance(T instance) {
+        return ( List<T>) getHibernateTemplate().findByExample(instance);
     }
 
     @Override
@@ -38,14 +39,21 @@ public class BaseHibernateDaoImpl<T extends BaseEntity, ID extends Serializable>
 
     @Override
     public int getCountByCriteria(final Criteria criteria) {
-        Integer count = (Integer) criteria.setProjection(Projections.rowCount()).uniqueResult();
-        return count.intValue();
+        return Integer.parseInt(String.valueOf(criteria.setProjection(Projections.rowCount()).uniqueResult()));
     }
 
     @Override
-    public <T extends BaseEntity> List<T> getEntityWithPagination(T instance, Order order, String orderBy, Criterion... criterions) {
-        Criteria criteria = createCriteria(instance.getClass(), order, orderBy, criterions);
-        return criteria.list();
+    public <T extends BaseEntity> List<T> getEntityWithPaginationBySql(Class clazz, int page, int pageSize, String sql, List<String> params) {
+        String postfix = " limit " + (page - 1) * pageSize + "," + page * pageSize;
+
+        Query query = currentSession().createSQLQuery(sql + postfix);
+        if(params != null) {
+            int i = 0;
+            for(String param : params) {
+                query.setParameter(i++, param);
+            }
+        }
+        return query.list();
     }
 
     @Override

@@ -29,7 +29,7 @@ public interface BaseDao<T extends BaseEntity, ID extends Serializable> {
      * @param instance
      * @return
      */
-    public <T extends BaseEntity> T getEntityByInstance(T instance);
+    public <T extends BaseEntity> List<T> getEntityByInstance(T instance);
 
     /**
      *
@@ -48,19 +48,14 @@ public interface BaseDao<T extends BaseEntity, ID extends Serializable> {
     public int getCountByCriteria(final Criteria criteria);
 
     /**
-     *
-     *
-     *
-     *
-     * @param instance
-     * @param order
-     * @param orderBy
-     * @param criterions    @return     */
-    public <T extends BaseEntity> List<T> getEntityWithPagination(T instance, Order order, String orderBy, Criterion... criterions);
+     * @param clazz
+     * @param page
+     * @param pageSize
+     * @param sql
+     * @param params   */
+    public <T extends BaseEntity> List<T> getEntityWithPaginationBySql(Class clazz, int page, int pageSize, String sql, List<String> params);
 
     /**
-     *
-     *
      *
      * @param instance
      * @param order
@@ -71,7 +66,6 @@ public interface BaseDao<T extends BaseEntity, ID extends Serializable> {
     public Criteria createCriteria(T instance, Order order, String orderBy, Criterion... criterions);
 
     /**
-     *
      *
      * @param clazz
      * @param order
