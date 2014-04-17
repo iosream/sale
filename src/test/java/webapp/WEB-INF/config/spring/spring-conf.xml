@@ -47,6 +47,5 @@
         </property>
     </bean>
 
-    <!-- import spring beans -->
     <import resource="spring-beans.xml"/>
 </beans>
