@@ -97,14 +97,6 @@ public interface BaseDao<T extends BaseDomain, ID extends Serializable> {
 
     /**
      *
-     * @param id
-     * @param clazz
-     * @return
-     */
-    public void delete(ID id, Class clazz);
-
-    /**
-     *
      * @param instance
      */
     public ID save(T instance);

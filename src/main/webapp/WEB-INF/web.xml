@@ -17,7 +17,7 @@
     <!-- load all configurations -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/config/spring/spring-conf.xml</param-value>
+        <param-value>classpath:config/spring/spring-conf.xml</param-value>
     </context-param>
 
     <!-- spring mvc -->
@@ -26,7 +26,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/config/spring/spring-mvc.xml</param-value>
+            <param-value>classpath:config/spring/spring-mvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
