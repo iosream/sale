@@ -2,7 +2,7 @@ delimiter $$
 
 CREATE TABLE project.`TBL_USER` (
   `id` bigint(20) NOT NULL,
-  `username` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL AUTO_INCREMENT,
   `password` varchar(45) NOT NULL,
   `nickname` varchar(45) NOT NULL,
   `email` varchar(45) DEFAULT NULL,
@@ -10,4 +10,3 @@ CREATE TABLE project.`TBL_USER` (
   `gender` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8$$
-
