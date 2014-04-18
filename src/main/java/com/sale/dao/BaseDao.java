@@ -1,11 +1,11 @@
 package com.sale.dao;
 
 import com.sale.entity.BaseEntity;
+import com.sale.entity.Pagination;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,14 +15,13 @@ import java.util.List;
  * Time: 2:01 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface BaseDao<T extends BaseEntity, ID extends Serializable> {
+public interface BaseDao {
     /**
-     *
      * @param id
      * @param clazz
      * @return
      */
-    public <T extends BaseEntity> T getEntityById(ID id, Class clazz);
+    public <T extends BaseEntity> T getEntityById(long id, Class<T> clazz);
 
     /**
      *
@@ -33,71 +32,41 @@ public interface BaseDao<T extends BaseEntity, ID extends Serializable> {
 
     /**
      *
-     *
      * @param clazz
      * @param order
-     *@param orderBy @return
-     */
-    public <T extends BaseEntity> List<T> getAllEntities(Class clazz, Order order, String orderBy);
-
-    /**
-     *
-     * @param criteria
+     * @param orderBy
      * @return
      */
-    public int getCountByCriteria(final Criteria criteria);
+    public <T extends BaseEntity> List<T> getAllEntities(Class<T> clazz, Order order, String orderBy);
 
     /**
      * @param clazz
      * @param page
      * @param pageSize
      * @param sql
-     * @param params   */
-    public <T extends BaseEntity> List<T> getEntityWithPaginationBySql(Class clazz, int page, int pageSize, String sql, List<String> params);
+     * @param params
+     * */
+    public <T extends BaseEntity> List<T> getEntityWithPaginationBySql(Class<T> clazz, int page, int pageSize, String sql, List<String> params);
 
     /**
      *
      * @param instance
-     * @param order
-     * @param orderBy
-     * @param criterions
-     * @return
      */
-    public Criteria createCriteria(T instance, Order order, String orderBy, Criterion... criterions);
+    public <T extends BaseEntity> void delete(T instance);
+
+    /**
+     *
+     * @param instance
+     */
+    public <T extends BaseEntity> void saveOrUpdate(T instance);
 
     /**
      *
      * @param clazz
      * @param order
      * @param orderBy
-     * @param criterions
+     * @param <T>
      * @return
      */
-    public Criteria createCriteria(Class clazz, Order order, String orderBy, Criterion... criterions);
-
-    /**
-     *
-     * @param clazz
-     * @param criterions
-     * @return
-     */
-    public Criteria createCriteria(Class clazz, Criterion... criterions);
-
-    /**
-     *
-     * @param instance
-     */
-    public void delete(T instance);
-
-    /**
-     *
-     * @param instance
-     */
-    public ID save(T instance);
-
-    /**
-     *
-     * @param instance
-     */
-    public void update(T instance);
+    public <T extends BaseEntity> Criteria createCriteria(Class<T> clazz, Order order, String orderBy);
 }

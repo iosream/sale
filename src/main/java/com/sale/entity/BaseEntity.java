@@ -14,59 +14,20 @@ import javax.persistence.Id;
  * Time: 3:13 PM
  * To change this template use File | Settings | File Templates.
  */
+
+@javax.persistence.MappedSuperclass
 public class BaseEntity implements java.io.Serializable {
-    private int rows;
-    private int total;
-    private int pageSize;
-    private int startIndex;
-    private int totalPage;
-    private int page;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column
+    private long id;
 
-    public int getRows() {
-        return rows;
+    public long getId() {
+        return id;
     }
 
-    public void setRows(int rows) {
-        this.rows = rows;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public int getStartIndex() {
-        return startIndex;
-    }
-
-    public void setStartIndex(int startIndex) {
-        this.startIndex = startIndex;
-    }
-
-    public int getTotalPage() {
-        return totalPage;
-    }
-
-    public void setTotalPage(int totalPage) {
-        this.totalPage = totalPage;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
 }

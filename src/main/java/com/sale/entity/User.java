@@ -10,7 +10,7 @@ import javax.persistence.*;
  * To change this template use File | Settings | File Templates.
  */
 @Entity
-@Table(name = "tbl_user")
+@Table(name = "TBL_USER")
 public class User extends BaseEntity {
     public enum GenderType {
         male,
@@ -26,10 +26,6 @@ public class User extends BaseEntity {
             }
         }
     }
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column
-    private long id;
 
     @Column(nullable = false)
     private String username;
@@ -47,15 +43,8 @@ public class User extends BaseEntity {
     private String mobile;
 
     @Column(nullable = false)
-    private String gender;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    @Enumerated(EnumType.STRING)
+    private GenderType gender;
 
     public String getUsername() {
         return username;
@@ -97,11 +86,11 @@ public class User extends BaseEntity {
         this.mobile = mobile;
     }
 
-    public String getGender() {
+    public GenderType getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(GenderType gender) {
         this.gender = gender;
     }
 }
