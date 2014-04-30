@@ -54,7 +54,7 @@ public class TestBaseDao {
         List<String> params = new ArrayList<String>();
         params.add("admin");
         params.add("pwd");
-        List<User> users =  baseHibernateDao.getEntityWithPaginationBySql(User.class, 1, 1, sql , params);
+        List<User> users = baseHibernateDao.getEntityWithPaginationBySql(User.class, 1, 1, sql , params);
 //        assertEquals(users.size(), 1);
     }
 
@@ -80,5 +80,14 @@ public class TestBaseDao {
         baseHibernateDao.saveOrUpdate(user);
 //        user.setNickname("管理员2");
 //        baseHibernateDao.saveOrUpdate(user);
+    }
+
+    @Test
+    public void testEntitiesBySql() {
+        String sql = "select * from TBL_USER tu where username = ? and password = ? lock in share mode";
+        List<String> params = new ArrayList<String>();
+        params.add("admin");
+        params.add("pwd");
+        List<User> users =  baseHibernateDao.getEntitiesBySql(sql, params);
     }
 }

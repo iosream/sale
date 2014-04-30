@@ -79,4 +79,16 @@ public class BaseHibernateDaoImpl extends HibernateDaoSupport implements BaseDao
             getHibernateTemplate().update(instance);
         }
     }
+
+    @Override
+    public <T extends BaseEntity> List<T> getEntitiesBySql(String sql, List<String> params) {
+        Query query = currentSession().createSQLQuery(sql);
+        if(params != null) {
+            int i = 0;
+            for(String param : params) {
+                query.setParameter(i++, param);
+            }
+        }
+        return query.list();
+    }
 }

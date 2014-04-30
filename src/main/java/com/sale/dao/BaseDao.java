@@ -69,4 +69,14 @@ public interface BaseDao {
      * @return
      */
     public <T extends BaseEntity> Criteria createCriteria(Class<T> clazz, Order order, String orderBy);
+
+    /**
+     *
+     *
+     *
+     * @param sql
+     * @param params
+     * @return
+     */
+    public <T extends BaseEntity> List<T> getEntitiesBySql(String sql, List<String> params);
 }
